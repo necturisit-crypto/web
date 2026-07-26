@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Necturis - Tecnología que impulsa empresas</title>
+  <meta name="description" content="Administramos toda tu infraestructura tecnológica mediante planes mensuales de soporte profesional. Soporte técnico, cloud, ciberseguridad y automatización.">
+  
+  <!-- Google Fonts: Inter & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. VARIABLES CSS (:root) & DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      /* Palette */
+      --bg-dark: #111111;
+      --bg-dark-alt: #0B0B0B;
+      --card-bg: #1B1B1B;
+      --card-bg-hover: #222226;
+      --accent-blue: #00AEEF;
+      --accent-blue-hover: #0096ce;
+      --accent-blue-glow: rgba(0, 174, 239, 0.25);
+      --accent-blue-subtle: rgba(0, 174, 239, 0.08);
+      --text-main: #FFFFFF;
+      --text-muted: #A1A1AA;
+      --border-color: #2A2A2A;
+      --border-color-hover: rgba(0, 174, 239, 0.4);
+
+      /* Typography */
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      /* Layout & Spacing */
+      --container-max: 1240px;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+
+      /* Transitions & Animations */
+      --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 40px -10px rgba(0, 174, 239, 0.3);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: var(--bg-dark);
+      position: relative;
+    }
+
+    /* Background Subtle Grid & Ambient Lighting */
+    .bg-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 50% -20%, rgba(0, 174, 239, 0.15), transparent 70%),
+        radial-gradient(circle at 90% 60%, rgba(0, 174, 239, 0.05), transparent 50%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 64px 64px, 64px 64px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* Selection Color */
+    ::selection {
+      background-color: var(--accent-blue);
+      color: #000;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-blue);
+    }
+
+    /* ==========================================================================
+       3. REUSABLE UTILITIES & LAYOUT
+       ========================================================================== */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      padding: 120px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 64px auto;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--accent-blue-subtle);
+      border: 1px solid rgba(0, 174, 239, 0.3);
+      border-radius: 100px;
+      color: var(--accent-blue);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: var(--text-main);
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* Section Divider Line */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--border-color) 30%, var(--border-color) 70%, transparent 100%);
+      margin: 0 auto;
+      opacity: 0.6;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: var(--transition-normal);
+      border: 1px solid transparent;
+      outline: none;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #000000;
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 20px rgba(0, 174, 239, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: #18beff;
+      border-color: #18beff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 174, 239, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      border-color: var(--border-color);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--text-muted);
+      transform: translateY(-2px);
+      color: #FFFFFF;
+    }
+
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+      transform: scale(0);
+      transition: transform 0.5s ease-out;
+      pointer-events: none;
+    }
+
+    .btn-glow:hover::before {
+      transform: scale(1);
+    }
+
+    /* Card Base */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: var(--transition-normal);
+      position: relative;
+      box-shadow: var(--shadow-card);
+    }
+
+    .card:hover {
+      background: var(--card-bg-hover);
+      border-color: var(--border-color-hover);
+      transform: translateY(-4px);
+    }
+
+    /* ==========================================================================
+       4. HEADER & NAVBAR
+       ========================================================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(17, 17, 17, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: var(--transition-fast);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: var(--text-main);
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, #006699 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--accent-blue-glow);
+    }
+
+    .logo-text span {
+      color: var(--accent-blue);
+    }
+
+    /* Nav Links */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-link {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent-blue);
+      transition: var(--transition-fast);
+      border-radius: 2px;
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Mobile Menu Toggle (CSS Only Drawer support) */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--text-main);
+      transition: var(--transition-fast);
+      border-radius: 2px;
+    }
+
+    /* Mobile Drawer Checkbox Hack (No JS requirement!) */
+    #nav-drawer-toggle {
+      display: none;
+    }
+
+    /* ==========================================================================
+       5. HERO SECTION
+       ========================================================================== */
+    .hero {
+      padding-top: 180px;
+      padding-bottom: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      background: rgba(0, 174, 239, 0.08);
+      border: 1px solid rgba(0, 174, 239, 0.3);
+      border-radius: 100px;
+      color: var(--accent-blue);
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 28px;
+      box-shadow: 0 0 20px rgba(0, 174, 239, 0.15);
+    }
+
+    .hero-badge-pulse {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-blue);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-blue);
+      animation: pulse-ring 2s infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 174, 239, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 8px rgba(0, 174, 239, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 174, 239, 0);
+      }
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      color: var(--text-main);
+    }
+
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, #FFFFFF 30%, var(--accent-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Hero SVG Graphic */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-graphic-card {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(27, 27, 27, 0.9), rgba(17, 17, 17, 0.95));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 174, 239, 0.15);
+      position: relative;
+    }
+
+    .hero-svg-container {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 25px rgba(0, 174, 239, 0.2));
+    }
+
+    /* Keyframe Animations for Hero SVG Elements */
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes float-medium {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes dash-flow {
+      to { stroke-dashoffset: -40; }
+    }
+
+    .svg-float-1 { animation: float-slow 5s ease-in-out infinite; }
+    .svg-float-2 { animation: float-medium 6s ease-in-out infinite 1s; }
+    .svg-spin { transform-origin: center; animation: spin-slow 20s linear infinite; }
+    .svg-line-flow { stroke-dasharray: 8 6; animation: dash-flow 2s linear infinite; }
+
+    /* ==========================================================================
+       6. SERVICIOS SECTION
+       ========================================================================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      transition: var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+      opacity: 0;
+      transition: var(--transition-fast);
+    }
+
+    .service-card:hover {
+      background: var(--card-bg-hover);
+      border-color: var(--border-color-hover);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 174, 239, 0.15);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-icon-box {
+      width: 52px;
+      height: 52px;
+      background: rgba(0, 174, 239, 0.08);
+      border: 1px solid rgba(0, 174, 239, 0.2);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--accent-blue);
+      transition: var(--transition-fast);
+    }
+
+    .service-card:hover .service-icon-box {
+      background: var(--accent-blue);
+      color: #000000;
+      box-shadow: 0 0 20px var(--accent-blue-glow);
+    }
+
+    .service-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ==========================================================================
+       7. PLANES DE SUSCRIPCIÓN SECTION
+       ========================================================================== */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .plan-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition-normal);
+      position: relative;
+    }
+
+    .plan-card:hover {
+      border-color: var(--border-color-hover);
+      transform: translateY(-8px);
+    }
+
+    /* Featured Business Plan Styling */
+    .plan-card.featured {
+      background: linear-gradient(180deg, #222228 0%, #161619 100%);
+      border: 2px solid var(--accent-blue);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(0, 174, 239, 0.25);
+      transform: scale(1.03);
+    }
+
+    .plan-card.featured:hover {
+      transform: scale(1.03) translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 45px rgba(0, 174, 239, 0.35);
+    }
+
+    .plan-popular-tag {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-blue);
+      color: #000000;
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 6px 20px;
+      border-radius: 100px;
+      box-shadow: 0 4px 15px var(--accent-blue-glow);
+    }
+
+    .plan-header {
+      margin-bottom: 28px;
+    }
+
+    .plan-name {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+
+    .plan-price-box {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .plan-price {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1;
+    }
+
+    .plan-currency {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .plan-period {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .plan-features {
+      margin-bottom: 36px;
+      flex-grow: 1;
+    }
+
+    .plan-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .plan-card.featured .plan-feature-item {
+      color: var(--text-main);
+    }
+
+    .plan-feature-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-blue-subtle);
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .plan-btn {
+      width: 100%;
+    }
+
+    /* ==========================================================================
+       8. POR QUÉ ELEGIRNOS SECTION
+       ========================================================================== */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .why-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      transition: var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .why-card:hover {
+      background: var(--card-bg-hover);
+      border-color: var(--border-color-hover);
+      transform: translateY(-6px);
+    }
+
+    .why-badge-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, rgba(0, 174, 239, 0.15) 0%, rgba(0, 174, 239, 0.02) 100%);
+      border: 1px solid rgba(0, 174, 239, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: var(--accent-blue);
+      box-shadow: 0 0 25px rgba(0, 174, 239, 0.1);
+    }
+
+    .why-title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .why-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ==========================================================================
+       9. CONTACTO SECTION
+       ========================================================================== */
+    .contact-wrapper {
+      background: linear-gradient(145deg, #1B1B1B 0%, #141414 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 64px 48px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 174, 239, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .contact-item-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 28px 20px;
+      text-align: center;
+      transition: var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-item-card:hover {
+      background: rgba(0, 174, 239, 0.05);
+      border-color: var(--accent-blue);
+      transform: translateY(-4px);
+    }
+
+    .contact-item-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(0, 174, 239, 0.1);
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .contact-item-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .contact-item-detail {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .contact-cta-box {
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* ==========================================================================
+       10. FOOTER
+       ========================================================================== */
+    .footer {
+      background: var(--bg-dark-alt);
+      border-top: 1px solid var(--border-color);
+      padding: 60px 0 40px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .footer-bottom-line {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-blue) 0%, transparent 100%);
+      margin-top: 40px;
+      opacity: 0.4;
+    }
+
+    /* ==========================================================================
+       11. MEDIA QUERIES (RESPONSIVE DESIGN)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .plans-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .plan-card.featured {
+        transform: scale(1);
+      }
+      .plan-card.featured:hover {
+        transform: translateY(-8px);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        height: 70px;
+      }
+      .nav-container {
+        height: 70px;
+      }
+
+      /* Mobile Navigation Drawer with Pure CSS */
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--card-bg);
+        border-bottom: 1px solid var(--border-color);
+        flex-direction: column;
+        padding: 32px 24px;
+        gap: 20px;
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+      }
+
+      #nav-drawer-toggle:checked ~ .nav-menu {
+        transform: translateY(0%);
+      }
+
+      #nav-drawer-toggle:checked ~ .menu-toggle span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+      }
+      #nav-drawer-toggle:checked ~ .menu-toggle span:nth-child(2) {
+        opacity: 0;
+      }
+      #nav-drawer-toggle:checked ~ .menu-toggle span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-wrapper {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Grid Background -->
+  <div class="bg-grid"></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo" aria-label="Necturis Home">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="logo-text">NECTURIS<span>.</span></div>
+      </a>
+
+      <!-- CSS Mobile Drawer Checkbox -->
+      <input type="checkbox" id="nav-drawer-toggle">
+      
+      <label for="nav-drawer-toggle" class="menu-toggle" aria-label="Abrir Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nav-menu">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#servicios" class="nav-link">Servicios</a>
+        <a href="#planes" class="nav-link">Planes</a>
+        <a href="#por-que" class="nav-link">Nosotros</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#contacto" class="btn btn-primary btn-glow">Solicitar Asesoría</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="inicio" class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Hero Text Content -->
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="hero-badge-pulse"></span>
+              Gestión de Infraestructura de Alto Nivel
+            </div>
+            <h1 class="hero-title">
+              Tecnología que <span class="gradient-text">impulsa empresas.</span>
+            </h1>
+            <p class="hero-description">
+              Administramos toda tu infraestructura tecnológica mediante planes mensuales de soporte profesional. Rendimiento, continuidad operativa y ciberseguridad garantizada.
+            </p>
+            <div class="hero-buttons">
+              <a href="#planes" class="btn btn-primary btn-glow">
+                Ver Planes
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="#contacto" class="btn btn-secondary">
+                Contactar
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Modern SVG Illustration -->
+          <div class="hero-visual">
+            <div class="hero-graphic-card">
+              <svg class="hero-svg-container" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background Glowing Grid Nodes -->
+                <circle cx="250" cy="200" r="180" stroke="#00AEEF" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4 4" />
+                <circle cx="250" cy="200" r="120" stroke="#00AEEF" stroke-opacity="0.15" stroke-width="1" />
+                
+                <!-- Center Core Node (AI & Cloud) -->
+                <g class="svg-float-1">
+                  <rect x="180" y="140" width="140" height="120" rx="16" fill="#1B1B1B" stroke="#00AEEF" stroke-width="2" />
+                  <rect x="195" y="160" width="110" height="12" rx="4" fill="#00AEEF" fill-opacity="0.2" />
+                  <circle cx="210" cy="166" r="3" fill="#00AEEF" />
+                  <circle cx="225" cy="166" r="3" fill="#00AEEF" />
+                  
+                  <rect x="195" y="184" width="110" height="12" rx="4" fill="#00AEEF" fill-opacity="0.2" />
+                  <circle cx="210" cy="190" r="3" fill="#00AEEF" />
+                  <circle cx="225" cy="190" r="3" fill="#00AEEF" />
+
+                  <rect x="195" y="208" width="110" height="32" rx="6" fill="#222228" stroke="#2A2A2A" />
+                  <text x="210" y="229" fill="#00AEEF" font-family="Montserrat" font-weight="700" font-size="11">NECTURIS CORE</text>
+                </g>
+
+                <!-- Floating Network Nodes -->
+                <!-- Cloud Service Node -->
+                <g class="svg-float-2">
+                  <rect x="60" y="70" width="110" height="70" rx="12" fill="#1B1B1B" stroke="#2A2A2A" stroke-width="1.5" />
+                  <path d="M100 100 C100 90, 120 90, 125 96 C130 92, 140 98, 135 106 C142 108, 140 118, 130 118 L95 118 C88 118, 88 108, 95 106 C95 100, 100 98, 100 100 Z" fill="none" stroke="#00AEEF" stroke-width="1.5"/>
+                  <text x="80" y="130" fill="#A1A1AA" font-family="Inter" font-size="9" font-weight="600">CLOUD NODE</text>
+                </g>
+
+                <!-- Cybersecurity Shield Node -->
+                <g class="svg-float-1">
+                  <rect x="330" y="80" width="110" height="70" rx="12" fill="#1B1B1B" stroke="#2A2A2A" stroke-width="1.5" />
+                  <path d="M385 98 L397 103 V112 C397 120 385 125 385 125 C385 125 373 120 373 112 V103 L385 98 Z" fill="none" stroke="#00AEEF" stroke-width="1.5"/>
+                  <text x="350" y="138" fill="#A1A1AA" font-family="Inter" font-size="9" font-weight="600">FIREWALL 24/7</text>
+                </g>
+
+                <!-- Server Rack Node -->
+                <g class="svg-float-2">
+                  <rect x="70" y="260" width="120" height="75" rx="12" fill="#1B1B1B" stroke="#2A2A2A" stroke-width="1.5" />
+                  <rect x="85" y="275" width="90" height="10" rx="2" fill="#222" stroke="#00AEEF" stroke-width="1" />
+                  <rect x="85" y="292" width="90" height="10" rx="2" fill="#222" stroke="#00AEEF" stroke-width="1" />
+                  <circle cx="165" cy="280" r="2" fill="#00AEEF" />
+                  <circle cx="165" cy="297" r="2" fill="#00AEEF" />
+                  <text x="92" y="322" fill="#A1A1AA" font-family="Inter" font-size="9" font-weight="600">SERVERS / DOCKER</text>
+                </g>
+
+                <!-- AI Infrastructure Node -->
+                <g class="svg-float-1">
+                  <rect x="320" y="250" width="120" height="75" rx="12" fill="#1B1B1B" stroke="#2A2A2A" stroke-width="1.5" />
+                  <circle cx="380" cy="280" r="14" fill="none" stroke="#00AEEF" stroke-width="1.5" />
+                  <path d="M380 270 V290 M370 280 H390" stroke="#00AEEF" stroke-width="1.5" />
+                  <text x="338" y="312" fill="#A1A1AA" font-family="Inter" font-size="9" font-weight="600">AUTOMATION & AI</text>
+                </g>
+
+                <!-- Connecting Laser Vectors -->
+                <path d="M170 105 L210 140" stroke="#00AEEF" stroke-opacity="0.6" stroke-width="1.5" class="svg-line-flow" />
+                <path d="M330 115 L290 140" stroke="#00AEEF" stroke-opacity="0.6" stroke-width="1.5" class="svg-line-flow" />
+                <path d="M190 275 L220 260" stroke="#00AEEF" stroke-opacity="0.6" stroke-width="1.5" class="svg-line-flow" />
+                <path d="M320 270 L280 260" stroke="#00AEEF" stroke-opacity="0.6" stroke-width="1.5" class="svg-line-flow" />
+              </svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- SERVICIOS SECTION -->
+    <section id="servicios" class="section">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-badge">Ecosistema Integral</div>
+          <h2 class="section-title">Servicios de clase empresarial</h2>
+          <p class="section-subtitle">
+            Soluciones tecnológicas robustas diseñadas para mantener tu infraestructura operando con máxima eficiencia y seguridad.
+          </p>
+        </div>
+
+        <div class="services-grid">
+
+          <!-- 1. Mesa de Ayuda -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </div>
+            <h3 class="service-title">Mesa de Ayuda</h3>
+            <p class="service-desc">Atención oportuna a requerimientos de usuarios finales con tickets priorizados.</p>
+          </div>
+
+          <!-- 2. Soporte Técnico -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            </div>
+            <h3 class="service-title">Soporte Técnico</h3>
+            <p class="service-desc">Resolución experta de incidencias de hardware, software y periféricos corporativos.</p>
+          </div>
+
+          <!-- 3. Windows Server -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            </div>
+            <h3 class="service-title">Windows Server</h3>
+            <p class="service-desc">Administración de Active Directory, políticas de grupo (GPO) y dominios.</p>
+          </div>
+
+          <!-- 4. Linux -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            </div>
+            <h3 class="service-title">Linux</h3>
+            <p class="service-desc">Despliegue y optimización de servidores Ubuntu, Debian, RedHat y Rocky Linux.</p>
+          </div>
+
+          <!-- 5. Microsoft 365 -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <h3 class="service-title">Microsoft 365</h3>
+            <p class="service-desc">Gestión de licencias, Exchange Online, SharePoint y políticas de seguridad Teams.</p>
+          </div>
+
+          <!-- 6. Google Workspace -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+            </div>
+            <h3 class="service-title">Google Workspace</h3>
+            <p class="service-desc">Administración centralizada de dominios, Gmail corporativo y Google Drive.</p>
+          </div>
+
+          <!-- 7. Cloud -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"></path></svg>
+            </div>
+            <h3 class="service-title">Cloud</h3>
+            <p class="service-desc">Migración y arquitectura en nubes híbridas y públicas (AWS, Azure, GCP).</p>
+          </div>
+
+          <!-- 8. Backups -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            </div>
+            <h3 class="service-title">Backups</h3>
+            <p class="service-desc">Respaldos automatizados inmutables y planes de recuperación ante desastres (DRP).</p>
+          </div>
+
+          <!-- 9. Firewall -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3 class="service-title">Firewall</h3>
+            <p class="service-desc">Protección perimetral de red, filtrado de contenido y prevención de intrusos (IPS).</p>
+          </div>
+
+          <!-- 10. VPN -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <h3 class="service-title">VPN</h3>
+            <p class="service-desc">Conexiones cifradas punto a punto y acceso remoto seguro para teletrabajo.</p>
+          </div>
+
+          <!-- 11. Virtualización -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            </div>
+            <h3 class="service-title">Virtualización</h3>
+            <p class="service-desc">Consolidación de servidores físicos para maximizar la eficiencia de hardware.</p>
+          </div>
+
+          <!-- 12. Docker -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            </div>
+            <h3 class="service-title">Docker</h3>
+            <p class="service-desc">Contenedorización de aplicaciones para despliegues ágiles y entornos aislados.</p>
+          </div>
+
+          <!-- 13. Proxmox -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+            </div>
+            <h3 class="service-title">Proxmox</h3>
+            <p class="service-desc">Plataforma Open Source para gestión de máquinas virtuales y contenedores LXC.</p>
+          </div>
+
+          <!-- 14. VMware -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </div>
+            <h3 class="service-title">VMware</h3>
+            <p class="service-desc">Administración de cluster ESXi y vCenter para entornos de alta disponibilidad.</p>
+          </div>
+
+          <!-- 15. Python -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <h3 class="service-title">Python</h3>
+            <p class="service-desc">Desarrollo de scripts avanzados de integración y procesamiento de datos.</p>
+          </div>
+
+          <!-- 16. PowerShell -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            </div>
+            <h3 class="service-title">PowerShell</h3>
+            <p class="service-desc">Automatización de tareas administrativas en entornos Microsoft y servidores.</p>
+          </div>
+
+          <!-- 17. Automatización -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </div>
+            <h3 class="service-title">Automatización</h3>
+            <p class="service-desc">Reducción de trabajo operativo repetitivo mediante flujos inteligentes.</p>
+          </div>
+
+          <!-- 18. Grafana -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </div>
+            <h3 class="service-title">Grafana</h3>
+            <p class="service-desc">Dashboards de métricas en tiempo real para visualizar el estado de tu IT.</p>
+          </div>
+
+          <!-- 19. Prometheus -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <h3 class="service-title">Prometheus</h3>
+            <p class="service-desc">Recolector de métricas y sistema de alertas preventivas para servicios críticos.</p>
+          </div>
+
+          <!-- 20. Ciberseguridad -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+            </div>
+            <h3 class="service-title">Ciberseguridad</h3>
+            <p class="service-desc">Protección EDR, prevención de ransomware y auditorías de vulnerabilidades.</p>
+          </div>
+
+          <!-- 21. Monitoreo -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <h3 class="service-title">Monitoreo</h3>
+            <p class="service-desc">Supervisión continua de disponibilidad, ancho de banda y recursos de red.</p>
+          </div>
+
+          <!-- 22. Redes -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            </div>
+            <h3 class="service-title">Redes</h3>
+            <p class="service-desc">Diseño, configuración de Switches, Routers, VLANs y enlaces corporativos.</p>
+          </div>
+
+          <!-- 23. Impresión Corporativa -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            </div>
+            <h3 class="service-title">Impresión Corporativa</h3>
+            <p class="service-desc">Gestión centralizada de servidores de impresión y control de costos de insumos.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- PLANES DE SUSCRIPCIÓN SECTION -->
+    <section id="planes" class="section">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-badge">Planes Mensuales</div>
+          <h2 class="section-title">Inversión transparente para tu empresa</h2>
+          <p class="section-subtitle">
+            Escoge el nivel de soporte que mejor se adapta al tamaño y crecimiento de tu organización.
+          </p>
+        </div>
+
+        <div class="plans-grid">
+          
+          <!-- PLAN 1: START -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <h3 class="plan-name">START</h3>
+              <div class="plan-price-box">
+                <span class="plan-price">USD 99</span>
+                <span class="plan-period">/mes</span>
+              </div>
+              <p class="plan-currency">Ideal para pequeñas empresas e inicios rápidos.</p>
+            </div>
+
+            <div class="plan-features">
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Mesa de ayuda</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Soporte remoto</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Hasta 10 usuarios</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Horario laboral (9:00 - 18:00)</span>
+              </div>
+            </div>
+
+            <a href="#contacto" class="btn btn-secondary plan-btn">Comenzar Plan</a>
+          </div>
+
+          <!-- PLAN 2: BUSINESS (DESTACADO VISUALMENTE) -->
+          <div class="plan-card featured">
+            <div class="plan-popular-tag">Más Popular</div>
+            
+            <div class="plan-header">
+              <h3 class="plan-name">BUSINESS</h3>
+              <div class="plan-price-box">
+                <span class="plan-price">USD 249</span>
+                <span class="plan-period">/mes</span>
+              </div>
+              <p class="plan-currency">Cobertura integral para empresas en crecimiento.</p>
+            </div>
+
+            <div class="plan-features">
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Todo lo anterior del plan Start</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Administración de servidores</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Microsoft 365 / Workspace</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Gestión de Backups inmutables</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Configuración y soporte VPN</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Monitoreo continuo de red</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Hasta 50 usuarios</span>
+              </div>
+            </div>
+
+            <a href="#contacto" class="btn btn-primary btn-glow plan-btn">Comenzar Plan</a>
+          </div>
+
+          <!-- PLAN 3: ENTERPRISE -->
+          <div class="plan-card">
+            <div class="plan-header">
+              <h3 class="plan-name">ENTERPRISE</h3>
+              <div class="plan-price-box">
+                <span class="plan-price">Consultar</span>
+              </div>
+              <p class="plan-currency">Infraestructura a medida para grandes operaciones.</p>
+            </div>
+
+            <div class="plan-features">
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Usuarios ilimitados</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Integraciones de IA Corporativa</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Arquitectura Cloud Dedicada</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Infraestructura Avanzada</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Automatización a medida</span>
+              </div>
+              <div class="plan-feature-item">
+                <div class="plan-feature-icon">✓</div>
+                <span>Monitoreo 24/7 con SLA garantizado</span>
+              </div>
+            </div>
+
+            <a href="#contacto" class="btn btn-secondary plan-btn">Contactar Ventas</a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- POR QUÉ ELEGIRNOS SECTION -->
+    <section id="por-que" class="section">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-badge">Nuestra Garantía</div>
+          <h2 class="section-title">¿Por qué elegir Necturis?</h2>
+          <p class="section-subtitle">
+            Aportamos tranquilidad tecnológica con estándares internacionales de excelencia y tiempo de respuesta inmediato.
+          </p>
+        </div>
+
+        <div class="why-grid">
+          
+          <!-- Card 1 -->
+          <div class="why-card">
+            <div class="why-badge-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3 class="why-title">✔ Más de 12 años de experiencia</h3>
+            <p class="why-desc">Trayectoria comprobada liderando proyectos de infraestructura en múltiples sectores corporativos.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="why-card">
+            <div class="why-badge-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <h3 class="why-title">✔ Soporte rápido</h3>
+            <p class="why-desc">Tiempos de respuesta ágiles con ingenieros certificados listos para resolver cualquier urgencia.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="why-card">
+            <div class="why-badge-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <h3 class="why-title">✔ Seguridad</h3>
+            <p class="why-desc">Protocolos rigurosos de cifrado, respaldos continuos y protección perimetral de datos.</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="why-card">
+            <div class="why-badge-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            </div>
+            <h3 class="why-title">✔ Soluciones escalables</h3>
+            <p class="why-desc">Arquitecturas flexibles diseñadas para adaptarse al ritmo de crecimiento de tu negocio.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CONTACTO SECTION -->
+    <section id="contacto" class="section">
+      <div class="container">
+        
+        <div class="contact-wrapper">
+          <div class="section-header">
+            <div class="section-badge">Hablemos Hoy</div>
+            <h2 class="section-title">Canales Directos de Contacto</h2>
+            <p class="section-subtitle">
+              Estamos listos para auditar tu infraestructura tecnológica y proponerte el plan ideal.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            
+            <!-- WhatsApp -->
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="contact-item-card">
+              <div class="contact-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              </div>
+              <h3 class="contact-item-title">WhatsApp</h3>
+              <p class="contact-item-detail">Atención inmediata 24/7</p>
+            </a>
+
+            <!-- Correo -->
+            <a href="mailto:contacto@necturis.com" class="contact-item-card">
+              <div class="contact-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <h3 class="contact-item-title">Correo</h3>
+              <p class="contact-item-detail">contacto@necturis.com</p>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-item-card">
+              <div class="contact-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </div>
+              <h3 class="contact-item-title">LinkedIn</h3>
+              <p class="contact-item-detail">Necturis Technologic</p>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-item-card">
+              <div class="contact-item-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </div>
+              <h3 class="contact-item-title">GitHub</h3>
+              <p class="contact-item-detail">Repositories & DevOps</p>
+            </a>
+
+          </div>
+
+          <div class="contact-cta-box">
+            <a href="mailto:contacto@necturis.com" class="btn btn-primary btn-glow">Solicitar Asesoría</a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-flex">
+        
+        <div class="footer-left">
+          <a href="#" class="logo">
+            <div class="logo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <div class="logo-text">NECTURIS<span>.</span></div>
+          </a>
+          <p class="footer-copy">© 2026 Necturis. Todos los derechos reservados.</p>
+        </div>
+
+        <nav class="nav-menu">
+          <a href="#inicio" class="nav-link">Inicio</a>
+          <a href="#servicios" class="nav-link">Servicios</a>
+          <a href="#planes" class="nav-link">Planes</a>
+          <a href="#contacto" class="nav-link">Contacto</a>
+        </nav>
+
+      </div>
+
+      <div class="footer-bottom-line"></div>
+    </div>
+  </footer>
+
+</body>
+</html>
